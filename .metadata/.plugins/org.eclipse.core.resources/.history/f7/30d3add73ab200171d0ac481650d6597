@@ -1,0 +1,117 @@
+package com.stackroute.spring.Hackathon.Controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.stackroute.spring.Hackathon.Domain.UserModel;
+import com.stackroute.spring.Hackathon.Repository.UserRepository;
+import com.stackroute.spring.Hackathon.Services.GitService;
+import com.stackroute.spring.Hackathon.Services.GitService_db;
+
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Controller
+@RequestMapping("/@v1.0/hackathon/user")
+@Api(value="github" ,description="operations perfdlsflsdfjlsdjfsdjflds")
+public class ReqController {
+		
+	@Autowired
+	private GitService_db service;
+	
+	@Autowired
+	private UserRepository userDetails;
+	
+	// Method to add a user to database
+	
+	@PostMapping(value="/add")
+    @ApiOperation(value = "Add a user",response=String.class)
+	public ResponseEntity<String> add_user(@RequestBody UserModel user){
+		if(user.getName()==null || user.getEmail()==null) {
+			throw new NullPointerException("Invalid field");		}
+		try {
+			UserModel usr=service.addUser(user);
+			return new ResponseEntity<>("User saved successfully",HttpStatus.OK);
+		}catch(NullPointerException e)
+		{
+			return new ResponseEntity<>("Invalid fields",HttpStatus.OK);
+		}
+		
+	}
+	
+	// Method to view list of all users available in database
+	
+	@GetMapping(value="/list",produces = "application/json")
+	@ApiOperation(value = "View a list of available Users", response = Iterable.class)	
+	public @ResponseBody Iterable<UserModel> getAllUser(){
+		return service.allUser();
+	}
+	
+	// Method to search a user by its id available in database
+	
+	@ApiOperation(value = "Search a User with an ID",response = UserModel.class)
+	@GetMapping(value="/userbyId/{userid}",produces = "application/json")
+	public ResponseEntity<UserModel> getUserby_Id(@PathVariable("userid") String id){
+	UserModel	usr=service.getUserbyId(id);
+		if(usr==null) {
+			throw new NullPointerException();
+		}	
+		try {
+			return new ResponseEntity<UserModel>(usr,HttpStatus.OK);
+	
+		}
+		catch(Exception e){
+			usr=null;
+			return new ResponseEntity<UserModel>(usr,HttpStatus.OK);
+		}
+	}
+	
+	// Method to update a user available in database
+	
+	@ApiOperation(value = "Update a user")
+	@PutMapping(value="/update/{userid}")
+	public ResponseEntity<String> updateName(@PathVariable("userid") String id, @RequestBody UserModel user){
+		if(userDetails.findOne(id)==null)
+		{
+			if(user.getName()==null || user.getEmail()==null ) 
+			throw new NullPointerException("field is invalid");
+		}
+		
+		try {
+			service.updateUserbyId(id,user);
+			return new ResponseEntity<>("User Updated Successfully",HttpStatus.OK);
+		}catch(NullPointerException e){
+			return new ResponseEntity<>("Invalid fields",HttpStatus.OK);
+		}
+	
+	}
+	
+	// Method to delete a user from database
+	
+	@ApiOperation(value = "Delete a user")
+	@DeleteMapping(value="/delete/{userid}")
+	public ResponseEntity<String> DeleteUser(@PathVariable("userid") String id){
+		service.DeletebyId(id);
+		return new ResponseEntity<>("User deleted successfully",HttpStatus.OK);
+		
+	}
+
+}

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AppControllerTest.testGetUserbyId" project="Hackathon" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testcase name="testGetUserbyId" classname="com.stackroute.spring.Hackathon.AppControllerTest" time="0.375"/>
+</testrun>

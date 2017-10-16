@@ -1,0 +1,99 @@
+package com.stackroute.spring.Hackathon;
+
+
+//import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.stackroute.spring.Hackathon.Domain.UserModel;
+
+
+/**
+ * Unit test for simple App.
+ */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class AppControllerTest extends TestCase {
+	 String user1;
+	    @LocalServerPort
+	    private int port;
+	    TestRestTemplate restTemplate = new TestRestTemplate();
+	    HttpHeaders headers = new HttpHeaders();
+	    UserModel user;
+	    @Before
+	    public void setUp() throws Exception {
+	         user = new UserModel("3","Paul Dawson","manish.nehara@cgi.com");
+	    }
+	    private String createURLWithPort(String uri) {
+	        return "http://localhost:" + port + uri;
+	    }
+	    
+	@After
+	public void tearDown() throws Exception {
+	}
+	
+	@Test
+	public void testSaveUser() throws Exception {
+	    HttpEntity<UserModel> entity = new HttpEntity<UserModel>(user, headers);
+	    ResponseEntity<String> response = restTemplate.exchange(
+	            createURLWithPort("/@v1.0/hackathon/user/add"),
+	            HttpMethod.POST, entity, String.class);
+	    assertNotNull(response);
+	    String actual = response.getBody();
+	    System.out.println(actual);
+	    assertEquals("User saved successfully",actual);
+	}
+	@Test
+	public void testList() throws Exception {
+	    HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+	    ResponseEntity<String> response = restTemplate.exchange(
+	            createURLWithPort("/@v1.0/hackathon/user/list"),
+	            HttpMethod.GET, entity, String.class);
+	    assertNotNull(response);
+	}
+	@Test
+	public void testGetUserbyId() throws Exception {
+		HttpEntity<UserModel> entity = new HttpEntity<UserModel>(user, headers);
+	    ResponseEntity<String> response = restTemplate.exchange(
+	            createURLWithPort("/@v1.0/hackathon/user/userbyId/101"),
+	            HttpMethod.GET, entity, String.class);
+	    assertNotNull(response);
+	}
+	@Test
+	  public void testUpdateUser() throws Exception {
+        HttpEntity<UserModel> entity = new HttpEntity<UserModel>(user, headers);
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/@v1.0/hackathon/user/update/3"),
+                HttpMethod.PUT, entity, String.class);
+        assertNotNull(response);
+        String actual = response.getBody();
+        System.out.println(actual);
+        assertEquals("User Updated Successfully",actual);
+  }
+	@Test
+	  public void testDeleteUser() throws Exception {
+          HttpEntity<UserModel> entity = new HttpEntity<UserModel>(user, headers);
+          ResponseEntity<String> response = restTemplate.exchange(
+                  createURLWithPort("/@v1.0/hackathon/user/delete/3"),
+                  HttpMethod.DELETE, entity, String.class);
+          assertNotNull(response);
+          String actual = response.getBody();
+          System.out.println(actual);
+          assertEquals("User deleted successfully",actual);
+    }
+	//@Test
+	//public void testDeleteUser() throws Exception {
+//}
+}

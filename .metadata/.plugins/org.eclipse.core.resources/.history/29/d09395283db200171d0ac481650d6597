@@ -1,0 +1,5 @@
+package com.stackroute.spring.Hackathon.Exception;
+
+public class NotValidEmail extends Exception{
+
+}

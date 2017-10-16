@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AppControllerTest" project="Hackathon" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="com.stackroute.spring.Hackathon.AppControllerTest" time="0.874">
+    <testcase name="testSaveUser" classname="com.stackroute.spring.Hackathon.AppControllerTest" time="0.478"/>
+    <testcase name="testList" classname="com.stackroute.spring.Hackathon.AppControllerTest" time="0.167"/>
+    <testcase name="testUpdateUser" classname="com.stackroute.spring.Hackathon.AppControllerTest" time="0.023"/>
+    <testcase name="testDeleteUser" classname="com.stackroute.spring.Hackathon.AppControllerTest" time="0.159"/>
+    <testcase name="testGetUserbyId" classname="com.stackroute.spring.Hackathon.AppControllerTest" time="0.047"/>
+  </testsuite>
+</testrun>

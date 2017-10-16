@@ -1,0 +1,62 @@
+!SESSION 2017-10-16 09:31:09.728 -----------------------------------------------
+eclipse.buildId=3.9.0.201707061823-RELEASE-e47
+java.version=1.8.0_131
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.ui 2 2 2017-10-16 09:31:30.682
+!MESSAGE org.eclipse.jdt.junit.ResultView: Deprecated relationship "fast" should be converted to "stack".
+
+!ENTRY org.eclipse.ui 2 2 2017-10-16 09:31:30.689
+!MESSAGE org.springframework.ide.eclipse.aop.ui.navigator.aopReferenceModelNavigator: Deprecated relationship "fast" should be converted to "stack".
+
+!ENTRY org.eclipse.ui 2 2 2017-10-16 09:31:30.690
+!MESSAGE org.eclipse.contribution.xref.ui.views.XReferenceView: Deprecated relationship "fast" should be converted to "stack".
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-16 09:31:32.029
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-16 09:31:32.030
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2017-10-16 09:32:08.803
+!MESSAGE No repository found at https://dl.bintray.com/pmd/pmd-eclipse-plugin/updates/%2520site.
+
+!ENTRY org.eclipse.lsp4e 1 0 2017-10-16 09:33:50.235
+!MESSAGE Non IFiles not supported yet
+
+!ENTRY org.eclipse.lsp4e 1 0 2017-10-16 09:33:50.235
+!MESSAGE Non IFiles not supported yet
+
+!ENTRY org.eclipse.lsp4e 1 0 2017-10-16 09:44:27.443
+!MESSAGE Non IFiles not supported yet
+
+!ENTRY org.springframework.ide.eclipse.boot.properties.editor 4 0 2017-10-16 09:48:39.010
+!MESSAGE java.lang.InterruptedException
+!STACK 0
+reactor.core.Exceptions$ReactiveException: java.lang.InterruptedException
+	at reactor.core.Exceptions.propagate(Exceptions.java:219)
+	at reactor.core.publisher.BlockingSingleSubscriber.blockingGet(BlockingSingleSubscriber.java:79)
+	at reactor.core.publisher.Mono.block(Mono.java:1301)
+	at org.springframework.ide.eclipse.boot.properties.editor.metadata.ValueProviderRegistry$ValueProviderStrategy.getValuesNow(ValueProviderRegistry.java:65)
+	at org.springframework.ide.eclipse.boot.properties.editor.metadata.BasicHintProvider.getValueHints(BasicHintProvider.java:71)
+	at org.springframework.ide.eclipse.boot.properties.editor.metadata.HintProviders$3.getValueHints(HintProviders.java:115)
+	at org.springframework.ide.eclipse.boot.properties.editor.SpringPropertiesCompletionEngine.getValueHints(SpringPropertiesCompletionEngine.java:468)
+	at org.springframework.ide.eclipse.boot.properties.editor.SpringPropertiesCompletionEngine.getValueHoverInfo(SpringPropertiesCompletionEngine.java:378)
+	at org.springframework.ide.eclipse.boot.properties.editor.SpringPropertiesCompletionEngine.getHoverInfo(SpringPropertiesCompletionEngine.java:585)
+	at org.springframework.ide.eclipse.editor.support.hover.HoverInfoTextHover.hovers_getHoverInfo(HoverInfoTextHover.java:105)
+	at org.springframework.ide.eclipse.editor.support.hover.HoverInfoTextHover.getHoverInfo2(HoverInfoTextHover.java:91)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+Caused by: java.lang.InterruptedException
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer.acquireSharedInterruptibly(AbstractQueuedSynchronizer.java:1302)
+	at java.util.concurrent.CountDownLatch.await(CountDownLatch.java:231)
+	at reactor.core.publisher.BlockingSingleSubscriber.blockingGet(BlockingSingleSubscriber.java:75)
+	... 10 more
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-16 09:49:52.886
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-16 09:49:52.886
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
